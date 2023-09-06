@@ -1,5 +1,6 @@
 using ExcelDataReader;
 using Microsoft.Office.Interop.Excel;
+using System.IO;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
@@ -18,62 +19,27 @@ namespace ResearchSearchTool
         private void BrowseButton_Click(object sender, EventArgs e)
         {
             OpenFileDialog file = new OpenFileDialog();
-
-            file.ShowDialog();
-            string path = file.FileName.ToString();
-
-            ExcelFileReader(path);
-        }
-
-
-        private void ExcelFileReader(string path)
-        {
-
-            var stream = File.Open(path, FileMode.Open, FileAccess.Read);
-            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
-            var reader = ExcelReaderFactory.CreateReader(stream);
-            var result = reader.AsDataSet();
-            var tables = result.Tables.Cast<System.Data.DataTable>();
-            foreach (DataTable table in tables)
+            if (file.ShowDialog() == DialogResult.OK)
             {
-                dataGridView1.DataSource = table;
+                filepathTextbox.Text = file.FileName;
             }
 
         }
 
-        private void readExcel()
+        private void readButton_Click(object sender, EventArgs e)
         {
-            string filepath = "c:\\Users\\lucas\\Documents\\Visual Studio Code\\Python\\issue_database.xlsx";
-            Application excelApp = new Application();
-            Workbook excelWB;
-            Worksheet excelWS;
-            Range excelRange;
-            excelWB = excelApp.Workbooks.Open(filepath);
-            excelWS = excelWB.Worksheets[2];
-            excelRange = excelWS.UsedRange;
-
-            int rowCount = excelRange.Rows.Count;
-            int columnCount = excelRange.Columns.Count;
-
-            for (int i = 1; i <= rowCount; i++)
+            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+            using (var stream = File.Open(filepathTextbox.Text, FileMode.Open, FileAccess.Read))
             {
-                for (int j = 1; j <= columnCount; j++)
+                using (var reader = ExcelReaderFactory.CreateReader(stream))
                 {
-                    if (excelRange.Cells[i, j] != null)
-                    {
+                    var data = reader.AsDataSet();
 
-                        Console.Write(excelRange.Cells[i, j].Value2.ToString());
-                    }
+                    dataGridView1.DataSource = data.Tables[0];
                 }
             }
-
-            Console.ReadKey();
-            Marshal.ReleaseComObject(excelWS);
-            Marshal.ReleaseComObject(excelRange);
-            excelWB.Close();
-            Marshal.ReleaseComObject(excelWB);
-            excelApp.Quit();
-            Marshal.ReleaseComObject(excelApp);
+            dataGridView1.Columns[0].HeaderText = "ID";
+            dataGridView1.Columns[1].HeaderText = "Client";
         }
 
 
@@ -81,54 +47,5 @@ namespace ResearchSearchTool
         {
 
         }
-
-        private void ApplyFilters()
-        {
-            // Get the user's input for Category, ESRS Topic, and Material.
-            string categoryFilter = categoryTextBox.Text;
-            string esrsTopicFilter = esrsTopicTextBox.Text;
-            string materialFilter = materialTextBox.Text;
-
-            // Build a filter string based on the user's input.
-            StringBuilder filterBuilder = new StringBuilder();
-
-            if (!string.IsNullOrEmpty(categoryFilter))
-            {
-                filterBuilder.Append($"[Category] LIKE '%{categoryFilter}%'");
-            }
-
-            if (!string.IsNullOrEmpty(esrsTopicFilter))
-            {
-                if (filterBuilder.Length > 0)
-                    filterBuilder.Append(" AND ");
-                filterBuilder.Append($"[ESRS Topic] LIKE '%{esrsTopicFilter}%'");
-            }
-
-            if (!string.IsNullOrEmpty(materialFilter))
-            {
-                if (filterBuilder.Length > 0)
-                    filterBuilder.Append(" AND ");
-                filterBuilder.Append($"[Material] LIKE '%{materialFilter}%'");
-            }
-
-            // Apply the filter to the BindingSource.
-            bindingSource.Filter = filterBuilder.ToString();
-        }
-
-        private void categoryTextBox_TextChanged(object sender, EventArgs e)
-        {
-            ApplyFilters();
-        }
-
-        private void esrsTopicTextBox_TextChanged(object sender, EventArgs e)
-        {
-            ApplyFilters();
-        }
-
-        private void materialTextBox_TextChanged(object sender, EventArgs e)
-        {
-            ApplyFilters();
-        }
-
     }
 }

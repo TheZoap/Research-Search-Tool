@@ -41,12 +41,14 @@
             esrsTopicTextBox = new TextBox();
             materialTextBox = new TextBox();
             materialLabel = new Label();
+            readButton = new Button();
+            filepathTextbox = new TextBox();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
             // BrowseButton
             // 
-            BrowseButton.Location = new Point(12, 12);
+            BrowseButton.Location = new Point(918, 32);
             BrowseButton.Name = "BrowseButton";
             BrowseButton.Size = new Size(112, 34);
             BrowseButton.TabIndex = 0;
@@ -56,12 +58,14 @@
             // 
             // dataGridView1
             // 
+            dataGridView1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(168, 44);
+            dataGridView1.Location = new Point(187, 98);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowHeadersWidth = 62;
             dataGridView1.RowTemplate.Height = 33;
-            dataGridView1.Size = new Size(991, 591);
+            dataGridView1.Size = new Size(972, 537);
             dataGridView1.TabIndex = 1;
             dataGridView1.CellContentClick += dataGridView1_CellContentClick;
             // 
@@ -113,11 +117,30 @@
             materialLabel.TabIndex = 6;
             materialLabel.Text = "Material";
             // 
+            // readButton
+            // 
+            readButton.Location = new Point(1036, 32);
+            readButton.Name = "readButton";
+            readButton.Size = new Size(112, 34);
+            readButton.TabIndex = 8;
+            readButton.Text = "Read";
+            readButton.UseVisualStyleBackColor = true;
+            readButton.Click += readButton_Click;
+            // 
+            // filepathTextbox
+            // 
+            filepathTextbox.Location = new Point(12, 32);
+            filepathTextbox.Name = "filepathTextbox";
+            filepathTextbox.Size = new Size(871, 31);
+            filepathTextbox.TabIndex = 9;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1171, 647);
+            Controls.Add(filepathTextbox);
+            Controls.Add(readButton);
             Controls.Add(materialTextBox);
             Controls.Add(materialLabel);
             Controls.Add(esrsTopicTextBox);
@@ -127,7 +150,6 @@
             Controls.Add(dataGridView1);
             Controls.Add(BrowseButton);
             Name = "Form1";
-            Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -148,5 +170,21 @@
         private TextBox esrsTopicTextBox;
         private TextBox materialTextBox;
         private Label materialLabel;
+        private Button readButton;
+        private TextBox filepathTextbox;
+        private DataGridViewTextBoxColumn Column1;
+        private DataGridViewTextBoxColumn Column2;
+        private DataGridViewTextBoxColumn Column3;
+        private DataGridViewTextBoxColumn Column4;
+        private DataGridViewTextBoxColumn Column5;
+        private DataGridViewTextBoxColumn Column6;
+        private DataGridViewTextBoxColumn Column7;
+        private DataGridViewTextBoxColumn Column8;
+        private DataGridViewTextBoxColumn Column9;
+        private DataGridViewTextBoxColumn Column10;
+        private DataGridViewTextBoxColumn Column11;
+        private DataGridViewTextBoxColumn Column12;
+        private DataGridViewTextBoxColumn Column13;
+        private DataGridViewTextBoxColumn Column14;
     }
 }
