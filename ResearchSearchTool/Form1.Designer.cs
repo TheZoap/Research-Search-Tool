@@ -75,6 +75,7 @@
             categoryTextBox.Name = "categoryTextBox";
             categoryTextBox.Size = new Size(150, 31);
             categoryTextBox.TabIndex = 2;
+            categoryTextBox.TextChanged += categoryTextBox_TextChanged;
             // 
             // categoryLabel
             // 
@@ -100,6 +101,7 @@
             esrsTopicTextBox.Name = "esrsTopicTextBox";
             esrsTopicTextBox.Size = new Size(150, 31);
             esrsTopicTextBox.TabIndex = 5;
+            esrsTopicTextBox.TextChanged += esrsTopicTextBox_TextChanged;
             // 
             // materialTextBox
             // 
@@ -107,6 +109,7 @@
             materialTextBox.Name = "materialTextBox";
             materialTextBox.Size = new Size(150, 31);
             materialTextBox.TabIndex = 7;
+            materialTextBox.TextChanged += materialTextBox_TextChanged;
             // 
             // materialLabel
             // 
