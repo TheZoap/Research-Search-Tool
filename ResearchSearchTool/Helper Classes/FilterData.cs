@@ -89,6 +89,37 @@ namespace ResearchSearchTool
 
             dv.RowFilter = filterExpression.ToString();
         }
-        
+
+        public static string BuildFilterExpression(string category, string esrsTopic, string subTopic,
+        string geography, string industry, string nace, string material)
+        {
+            var filterExpression = new StringBuilder();
+
+            AppendFilterExpression(category, "Category", filterExpression);
+            AppendFilterExpression(esrsTopic, "[ESRS Topic]", filterExpression);
+            AppendFilterExpression(subTopic, "[Sub-Topic]", filterExpression);
+            AppendFilterExpression(geography, "Geography", filterExpression);
+            AppendFilterExpression(industry, "Industry", filterExpression);
+            AppendFilterExpression(nace, "NACE", filterExpression);
+            AppendFilterExpression(material, "Material", filterExpression);
+
+            return filterExpression.ToString();
+        }
+
+        private static void AppendFilterExpression(string filterText, string columnName, StringBuilder filterExpression)
+        {
+            if (!string.IsNullOrWhiteSpace(filterText))
+            {
+                if (filterExpression.Length > 0)
+                {
+                    filterExpression.Append(" AND ");
+                }
+                filterExpression.Append(columnName);
+                filterExpression.Append(" LIKE '%");
+                filterExpression.Append(filterText);
+                filterExpression.Append("%'");
+            }
+        }
+
     }
 }

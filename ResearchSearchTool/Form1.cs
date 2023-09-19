@@ -10,7 +10,7 @@ namespace ResearchSearchTool
 {
     public partial class Form1 : Form
     {
-        private System.Windows.Forms.TextBox[] textBoxes;
+        private DataView dataView;
         public Form1()
         {
             InitializeComponent();
@@ -36,6 +36,7 @@ namespace ResearchSearchTool
 
                         if (data != null)
                         {
+                            dataView = data.DefaultView;
                             dataGridView.DataSource = data.DefaultView;
                             ColumnHeaders.SetColumnHeaders(dataGridView);
                         }
@@ -68,40 +69,56 @@ namespace ResearchSearchTool
             }
             file.Dispose(); // Dispose the OpenFileDialog object
         }
+        private void ApplyFilters()
+        {
+            if (dataView != null)
+            {
+                var filterExpression = FilterData.BuildFilterExpression(
+                    categoryTextBox.Text,
+                    esrsTopicTextBox.Text,
+                    subtopictextBox.Text,
+                    geographytextBox.Text,
+                    industryTextBox.Text,
+                    naceTextBox.Text,
+                    materialTextBox.Text);
+
+                dataView.RowFilter = filterExpression;
+            }
+        }
 
         private void categoryTextBox_TextChanged(object sender, EventArgs e)
         {
-            FilterData.FilterDataByCategory(dataGridView, categoryTextBox.Text);
+            ApplyFilters();
         }
 
         private void esrsTopicTextBox_TextChanged(object sender, EventArgs e)
         {
-            FilterData.FilterDataByESRSTopic(dataGridView, esrsTopicTextBox.Text);
+            ApplyFilters();
         }
 
         private void subtopictextBox_TextChanged(object sender, EventArgs e)
         {
-            FilterData.FilterDataBySubTopic(dataGridView, subtopictextBox.Text);
+            ApplyFilters();
         }
 
         private void geographytextBox_TextChanged(object sender, EventArgs e)
         {
-            FilterData.FilterDataByGeography(dataGridView, geographytextBox.Text);
+            ApplyFilters();
         }
 
         private void industryTextBox_TextChanged(object sender, EventArgs e)
         {
-            FilterData.FilterDataByIndustry(dataGridView, industryTextBox.Text);
+            ApplyFilters();
         }
 
         private void naceTextBox_TextChanged(object sender, EventArgs e)
         {
-            FilterData.FilterDataByNACE(dataGridView, naceTextBox.Text);
+            ApplyFilters();
         }
 
         private void materialTextBox_TextChanged(object sender, EventArgs e)
         {
-            FilterData.FilterDataByMaterial(dataGridView, materialTextBox.Text);
+            ApplyFilters();
         }
 
         private void dataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -109,6 +126,9 @@ namespace ResearchSearchTool
             // Add your custom logic here, if needed
         }
 
-        
+        private void exportButton_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

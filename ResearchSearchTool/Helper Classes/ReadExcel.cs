@@ -7,14 +7,14 @@ namespace ResearchSearchTool
 {
     public static class ReadExcel
     {
-        public static DataTable ReadExcelFile(string filePath)
+        public static DataTable ReadExcelFile(string filePath, int sheetIndex = 1)
         {
             try
             {
                 using (var stream = File.OpenRead(filePath))
                 using (var reader = ExcelReaderFactory.CreateReader(stream))
                 {
-                    var data = reader.AsDataSet(new ExcelDataSetConfiguration
+                    var dataSet = reader.AsDataSet(new ExcelDataSetConfiguration
                     {
                         ConfigureDataTable = (_) => new ExcelDataTableConfiguration
                         {
@@ -22,7 +22,12 @@ namespace ResearchSearchTool
                         }
                     });
 
-                    return data.Tables[0];
+                    if (dataSet.Tables.Count > sheetIndex)
+                    {
+                        return dataSet.Tables[sheetIndex];
+                    }
+
+                    throw new IndexOutOfRangeException("Sheet index is out of range.");
                 }
             }
             catch (IOException ex)
@@ -36,6 +41,10 @@ namespace ResearchSearchTool
             catch (NotSupportedException ex)
             {
                 MessageBox.Show($"The Excel file format is not supported: {ex.Message}");
+            }
+            catch (IndexOutOfRangeException ex)
+            {
+                MessageBox.Show($"Sheet index is out of range: {ex.Message}");
             }
             catch (Exception ex)
             {

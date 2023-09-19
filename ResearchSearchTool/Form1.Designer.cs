@@ -51,6 +51,7 @@
             industryLabel = new Label();
             naceLabel = new Label();
             naceTextBox = new TextBox();
+            exportButton = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridView).BeginInit();
             SuspendLayout();
             // 
@@ -109,7 +110,24 @@
             esrsTopicTextBox.Name = "esrsTopicTextBox";
             esrsTopicTextBox.Size = new Size(150, 31);
             esrsTopicTextBox.TabIndex = 5;
-            this.esrsTopicTextBox.TextChanged += new System.EventHandler(this.esrsTopicTextBox_TextChanged);
+            esrsTopicTextBox.TextChanged += esrsTopicTextBox_TextChanged;
+            // 
+            // materialTextBox
+            // 
+            materialTextBox.Location = new Point(10, 470);
+            materialTextBox.Name = "materialTextBox";
+            materialTextBox.Size = new Size(150, 31);
+            materialTextBox.TabIndex = 15;
+            materialTextBox.TextChanged += materialTextBox_TextChanged;
+            // 
+            // materialLabel
+            // 
+            materialLabel.AutoSize = true;
+            materialLabel.Location = new Point(14, 442);
+            materialLabel.Name = "materialLabel";
+            materialLabel.Size = new Size(75, 25);
+            materialLabel.TabIndex = 6;
+            materialLabel.Text = "Material";
             // 
             // filepathTextbox
             // 
@@ -160,6 +178,13 @@
             industryTextBox.TabIndex = 11;
             industryTextBox.TextChanged += industryTextBox_TextChanged;
             // 
+            // label1
+            // 
+            label1.Location = new Point(0, 0);
+            label1.Name = "label1";
+            label1.Size = new Size(100, 23);
+            label1.TabIndex = 0;
+            // 
             // industryLabel
             // 
             industryLabel.AutoSize = true;
@@ -186,28 +211,22 @@
             naceTextBox.TabIndex = 13;
             naceTextBox.TextChanged += naceTextBox_TextChanged;
             // 
-            // materialTextBox
+            // exportButton
             // 
-            materialTextBox.Location = new Point(10, 470);
-            materialTextBox.Name = "materialTextBox";
-            materialTextBox.Size = new Size(150, 31);
-            materialTextBox.TabIndex = 15;
-            materialTextBox.TextChanged += materialTextBox_TextChanged;
-            // 
-            // materialLabel
-            // 
-            materialLabel.AutoSize = true;
-            materialLabel.Location = new Point(14, 442);
-            materialLabel.Name = "materialLabel";
-            materialLabel.Size = new Size(75, 25);
-            materialLabel.TabIndex = 6;
-            materialLabel.Text = "Material";
+            exportButton.Location = new Point(1047, 32);
+            exportButton.Name = "exportButton";
+            exportButton.Size = new Size(112, 34);
+            exportButton.TabIndex = 21;
+            exportButton.Text = "Export";
+            exportButton.UseVisualStyleBackColor = true;
+            exportButton.Click += exportButton_Click;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1171, 647);
+            Controls.Add(exportButton);
             Controls.Add(naceLabel);
             Controls.Add(naceTextBox);
             Controls.Add(industryLabel);
@@ -257,5 +276,6 @@
         private Label industryLabel;
         private Label naceLabel;
         private TextBox naceTextBox;
+        private Button exportButton;
     }
 }
