@@ -34,7 +34,7 @@
         private void InitializeComponent()
         {
             BrowseButton = new Button();
-            dataGridView1 = new DataGridView();
+            dataGridView1 = new DoubleBufferedDataGridView();
             categoryTextBox = new TextBox();
             categoryLabel = new Label();
             esrsTopicLabel = new Label();
@@ -166,7 +166,7 @@
         #endregion
 
         private Button BrowseButton;
-        private DataGridView dataGridView1;
+        private DoubleBufferedDataGridView dataGridView1;
         private TextBox categoryTextBox;
         private Label categoryLabel;
         private Label esrsTopicLabel;
@@ -175,19 +175,5 @@
         private Label materialLabel;
         private Button readButton;
         private TextBox filepathTextbox;
-        private DataGridViewTextBoxColumn Column1;
-        private DataGridViewTextBoxColumn Column2;
-        private DataGridViewTextBoxColumn Column3;
-        private DataGridViewTextBoxColumn Column4;
-        private DataGridViewTextBoxColumn Column5;
-        private DataGridViewTextBoxColumn Column6;
-        private DataGridViewTextBoxColumn Column7;
-        private DataGridViewTextBoxColumn Column8;
-        private DataGridViewTextBoxColumn Column9;
-        private DataGridViewTextBoxColumn Column10;
-        private DataGridViewTextBoxColumn Column11;
-        private DataGridViewTextBoxColumn Column12;
-        private DataGridViewTextBoxColumn Column13;
-        private DataGridViewTextBoxColumn Column14;
     }
 }

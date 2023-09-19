@@ -1,12 +1,9 @@
 using ExcelDataReader;
-using Microsoft.Office.Interop.Excel;
+using System;
 using System.Data;
 using System.IO;
-using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
-using Application = Microsoft.Office.Interop.Excel.Application;
-using Range = Microsoft.Office.Interop.Excel.Range;
 
 namespace ResearchSearchTool
 {
@@ -24,104 +21,72 @@ namespace ResearchSearchTool
             {
                 filepathTextbox.Text = file.FileName;
             }
-
+            file.Dispose(); // Dispose the OpenFileDialog object
         }
 
-        private void readButton_Click(object sender, EventArgs e)
+        private async void readButton_Click(object sender, EventArgs e)
         {
-            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
-            using (var stream = File.Open(filepathTextbox.Text, FileMode.Open, FileAccess.Read))
+            try
             {
-                using (var reader = ExcelReaderFactory.CreateReader(stream))
+                var excelFilePath = filepathTextbox.Text;
+
+                if (excelFilePath != null && File.Exists(excelFilePath))
                 {
-                    // Specify that the first row should be treated as headers
-                    var data = reader.AsDataSet(new ExcelDataSetConfiguration
-                    {
-                        ConfigureDataTable = (_) => new ExcelDataTableConfiguration
-                        {
-                            UseHeaderRow = true,
-                        }
-                    });
+                    Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
 
-                    // Access the "Category" column by name
-                    System.Data.DataTable excelTable = data.Tables[0];
-                    // Check if the "Category" column exists in the DataTable
-                    if (excelTable.Columns.Contains("Category"))
-                    {
-                        // You can access the data in the "Category" column
-                        dataGridView1.DataSource = excelTable.DefaultView;
+                    var data = await Task.Run(() => ReadExcel.ReadExcelFile(excelFilePath));
 
-                        // Set the column headers
-                        SetColumnHeaders();
+                    if (data != null)
+                    {
+                        dataGridView1.DataSource = data.DefaultView;
+                        ColumnHeaders.SetColumnHeaders(dataGridView1);
                     }
                     else
                     {
-                        MessageBox.Show("The 'Category' column was not found in the Excel file.");
+                        MessageBox.Show("No data available to display.");
                     }
                 }
+                else
+                {
+                    MessageBox.Show("Invalid file path.");
+                }
             }
-
-            // Apply the filter if text is entered in categoryTextBox
-            if (!string.IsNullOrEmpty(categoryTextBox.Text))
+            catch (IOException ex)
             {
-                FilterDataByCategory(categoryTextBox.Text);
+                MessageBox.Show($"An I/O error occurred while reading the file: {ex.Message}");
             }
-        }
-
-
-        private void SetColumnHeaders()
-        {
-            // Set the column headers as you did before
-            dataGridView1.Columns[0].HeaderText = "ID";
-            dataGridView1.Columns[1].HeaderText = "Client";
-            dataGridView1.Columns[2].HeaderText = "Category";
-            dataGridView1.Columns[3].HeaderText = "ESRS Topic";
-            dataGridView1.Columns[4].HeaderText = "Sub-topic";
-            dataGridView1.Columns[5].HeaderText = "Geography";
-            dataGridView1.Columns[6].HeaderText = "Industry";
-            dataGridView1.Columns[7].HeaderText = "NACE";
-            dataGridView1.Columns[8].HeaderText = "Material";
-            dataGridView1.Columns[9].HeaderText = "Description";
-            dataGridView1.Columns[10].HeaderText = "Source";
-            dataGridView1.Columns[11].HeaderText = "Links";
-            dataGridView1.Columns[12].HeaderText = "Additional information";
-            dataGridView1.Columns[13].HeaderText = "Additional sources";
-        }
-
-        private void FilterDataByCategory(string filterText)
-        {
-            // Get the DataView from the DataGridView's DataSource
-            DataView dv = (DataView)dataGridView1.DataSource;
-
-            // Apply the filter to the "Category" column
-            dv.RowFilter = $"Category LIKE '%{filterText}%'";
-
-            // No need to re-bind the filtered DataView to the DataGridView
-            // It will automatically reflect the filtered data
-        }
-
-
-
-
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
+            catch (InvalidDataException ex)
+            {
+                MessageBox.Show($"The file is not in a valid format: {ex.Message}");
+            }
+            catch (NotSupportedException ex)
+            {
+                MessageBox.Show($"The file format is not supported: {ex.Message}");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error reading Excel file: {ex.Message}");
+            }
         }
 
         private void categoryTextBox_TextChanged(object sender, EventArgs e)
         {
-            // Filter the data based on the text in categoryTextBox
-            FilterDataByCategory(categoryTextBox.Text);
+            FilterData.FilterDataByCategory(dataGridView1,categoryTextBox.Text);
         }
 
         private void esrsTopicTextBox_TextChanged(object sender, EventArgs e)
         {
-
+            // Add any necessary logic for handling esrsTopicTextBox text change event
         }
 
         private void materialTextBox_TextChanged(object sender, EventArgs e)
         {
-
+            // Add any necessary logic for handling materialTextBox text change event
         }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+{
+            // Add your custom logic here, if needed
+}
     }
 }
