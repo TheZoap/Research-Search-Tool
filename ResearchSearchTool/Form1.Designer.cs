@@ -82,6 +82,7 @@
             dataGridView.TabIndex = 20;
             dataGridView.CellClick += dataGridView_CellClick;
             dataGridView.ShowCellToolTips = false;
+            dataGridView.ReadOnly = true;
             // 
             // categoryTextBox
             // 
