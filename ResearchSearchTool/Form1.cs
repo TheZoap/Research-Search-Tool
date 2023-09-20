@@ -1,5 +1,6 @@
 using ExcelDataReader;
 using OfficeOpenXml;
+using ResearchSearchTool.Helper_Classes;
 using System;
 using System.Data;
 using System.IO;
@@ -64,50 +65,10 @@ namespace ResearchSearchTool
         private void dataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             int rowIndex = e.RowIndex;
-            DataGridViewRow selectedRow = dataGridView.Rows[rowIndex];
-            DataGridViewCell selectedCell = selectedRow.Cells[e.ColumnIndex];
+            int columnIndex = e.ColumnIndex;
 
-            // Check if the clicked cell is already expanded
-            bool isExpanded = (bool)(selectedCell.Tag ?? false);
-
-            if (isExpanded)
-            {
-                // Reset the row height to the original height
-                selectedRow.Height = dataGridView.RowTemplate.Height;
-                selectedCell.Tag = false;
-                selectedCell.Style.WrapMode = DataGridViewTriState.False; // Disable text wrapping
-            }
-            else
-            {
-                // Store the original row height
-                int originalHeight = selectedRow.Height;
-
-                // Calculate the required height to accommodate the cell's content
-                int requiredHeight = GetRequiredHeight(selectedCell);
-
-                // Set the row height to the required height
-                selectedRow.Height = requiredHeight;
-
-                // Update the selected cell's tag to indicate it is expanded
-                selectedCell.Tag = true;
-                selectedCell.Style.WrapMode = DataGridViewTriState.True; // Enable text wrapping
-                selectedCell.Style.Alignment = DataGridViewContentAlignment.TopLeft; // Set vertical alignment to top
-
-            }
-        }
-
-        private int GetRequiredHeight(DataGridViewCell cell)
-        {
-            using (Graphics graphics = cell.DataGridView.CreateGraphics())
-            {
-                string cellText = cell.Value?.ToString() ?? string.Empty;
-                SizeF textSize = graphics.MeasureString(cellText, cell.DataGridView.Font, cell.Size.Width - 2);
-
-                // Calculate the required height with the desired factor
-                int requiredHeight = (int)(textSize.Height * 1.05f);
-
-                return requiredHeight;
-            }
+            CellClick.OnCellClick(dataGridView, rowIndex, columnIndex);
+            
         }
 
         private void ApplyFilters()

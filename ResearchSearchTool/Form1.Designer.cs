@@ -81,6 +81,7 @@
             dataGridView.Size = new Size(972, 537);
             dataGridView.TabIndex = 20;
             dataGridView.CellClick += dataGridView_CellClick;
+            dataGridView.ShowCellToolTips = false;
             // 
             // categoryTextBox
             // 
