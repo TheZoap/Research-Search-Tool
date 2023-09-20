@@ -52,6 +52,10 @@
             naceLabel = new Label();
             naceTextBox = new TextBox();
             exportButton = new Button();
+            descriptionTextBox = new TextBox();
+            descriptionLabel = new Label();
+            additionalTextBox = new TextBox();
+            additionalLabel = new Label();
             ((System.ComponentModel.ISupportInitialize)dataGridView).BeginInit();
             SuspendLayout();
             // 
@@ -76,7 +80,7 @@
             dataGridView.RowTemplate.Height = 33;
             dataGridView.Size = new Size(972, 537);
             dataGridView.TabIndex = 20;
-            dataGridView.CellContentClick += dataGridView_CellContentClick;
+            dataGridView.CellClick += dataGridView_CellClick;
             // 
             // categoryTextBox
             // 
@@ -221,11 +225,49 @@
             exportButton.UseVisualStyleBackColor = true;
             exportButton.Click += exportButton_Click;
             // 
+            // descriptionTextBox
+            // 
+            descriptionTextBox.Location = new Point(8, 532);
+            descriptionTextBox.Name = "descriptionTextBox";
+            descriptionTextBox.Size = new Size(150, 31);
+            descriptionTextBox.TabIndex = 23;
+            descriptionTextBox.TextChanged += descriptionTextBox_TextChanged;
+            // 
+            // descriptionLabel
+            // 
+            descriptionLabel.AutoSize = true;
+            descriptionLabel.Location = new Point(12, 504);
+            descriptionLabel.Name = "descriptionLabel";
+            descriptionLabel.Size = new Size(102, 25);
+            descriptionLabel.TabIndex = 22;
+            descriptionLabel.Text = "Description";
+            // 
+            // additionalTextBox
+            // 
+            additionalTextBox.Location = new Point(8, 594);
+            additionalTextBox.Name = "additionalTextBox";
+            additionalTextBox.Size = new Size(150, 31);
+            additionalTextBox.TabIndex = 25;
+            additionalTextBox.TextChanged += additionalTextBox_TextChanged;
+            // 
+            // additionalLabel
+            // 
+            additionalLabel.AutoSize = true;
+            additionalLabel.Location = new Point(12, 566);
+            additionalLabel.Name = "additionalLabel";
+            additionalLabel.Size = new Size(130, 25);
+            additionalLabel.TabIndex = 24;
+            additionalLabel.Text = "Additional info";
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1171, 647);
+            Controls.Add(additionalTextBox);
+            Controls.Add(additionalLabel);
+            Controls.Add(descriptionTextBox);
+            Controls.Add(descriptionLabel);
             Controls.Add(exportButton);
             Controls.Add(naceLabel);
             Controls.Add(naceTextBox);
@@ -277,5 +319,9 @@
         private Label naceLabel;
         private TextBox naceTextBox;
         private Button exportButton;
+        private TextBox descriptionTextBox;
+        private Label descriptionLabel;
+        private TextBox additionalTextBox;
+        private Label additionalLabel;
     }
 }

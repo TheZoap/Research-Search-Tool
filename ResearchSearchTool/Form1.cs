@@ -11,10 +11,10 @@ namespace ResearchSearchTool
     public partial class Form1 : Form
     {
         private DataView dataView;
+
         public Form1()
         {
             InitializeComponent();
-
         }
 
         private async void BrowseButton_Click(object sender, EventArgs e)
@@ -61,6 +61,55 @@ namespace ResearchSearchTool
             file.Dispose(); // Dispose the OpenFileDialog object
         }
 
+        private void dataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            int rowIndex = e.RowIndex;
+            DataGridViewRow selectedRow = dataGridView.Rows[rowIndex];
+            DataGridViewCell selectedCell = selectedRow.Cells[e.ColumnIndex];
+
+            // Check if the clicked cell is already expanded
+            bool isExpanded = (bool)(selectedCell.Tag ?? false);
+
+            if (isExpanded)
+            {
+                // Reset the row height to the original height
+                selectedRow.Height = dataGridView.RowTemplate.Height;
+                selectedCell.Tag = false;
+                selectedCell.Style.WrapMode = DataGridViewTriState.False; // Disable text wrapping
+            }
+            else
+            {
+                // Store the original row height
+                int originalHeight = selectedRow.Height;
+
+                // Calculate the required height to accommodate the cell's content
+                int requiredHeight = GetRequiredHeight(selectedCell);
+
+                // Set the row height to the required height
+                selectedRow.Height = requiredHeight;
+
+                // Update the selected cell's tag to indicate it is expanded
+                selectedCell.Tag = true;
+                selectedCell.Style.WrapMode = DataGridViewTriState.True; // Enable text wrapping
+                selectedCell.Style.Alignment = DataGridViewContentAlignment.TopLeft; // Set vertical alignment to top
+
+            }
+        }
+
+        private int GetRequiredHeight(DataGridViewCell cell)
+        {
+            using (Graphics graphics = cell.DataGridView.CreateGraphics())
+            {
+                string cellText = cell.Value?.ToString() ?? string.Empty;
+                SizeF textSize = graphics.MeasureString(cellText, cell.DataGridView.Font, cell.Size.Width - 2);
+
+                // Calculate the required height with the desired factor
+                int requiredHeight = (int)(textSize.Height * 1.05f);
+
+                return requiredHeight;
+            }
+        }
+
         private void ApplyFilters()
         {
             if (dataView != null)
@@ -72,7 +121,9 @@ namespace ResearchSearchTool
                     geographytextBox.Text,
                     industryTextBox.Text,
                     naceTextBox.Text,
-                    materialTextBox.Text);
+                    materialTextBox.Text,
+                    descriptionTextBox.Text,
+                    additionalTextBox.Text);
 
                 dataView.RowFilter = filterExpression;
             }
@@ -113,9 +164,14 @@ namespace ResearchSearchTool
             ApplyFilters();
         }
 
-        private void dataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void descriptionTextBox_TextChanged(object sender, EventArgs e)
         {
-            // Add your custom logic here, if needed
+            ApplyFilters();
+        }
+
+        private void additionalTextBox_TextChanged(object sender, EventArgs e)
+        {
+            ApplyFilters();
         }
 
         private void exportButton_Click(object sender, EventArgs e)
@@ -123,4 +179,4 @@ namespace ResearchSearchTool
             Export.ExportDataToExcel(dataGridView);
         }
     }
- }
+}

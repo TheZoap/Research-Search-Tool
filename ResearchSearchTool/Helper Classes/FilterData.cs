@@ -91,7 +91,8 @@ namespace ResearchSearchTool
         }
 
         public static string BuildFilterExpression(string category, string esrsTopic, string subTopic,
-        string geography,string industry, string nace, string material)
+        string geography,string industry, string nace, string material, string description,
+        string additional)
         {
             var filterExpression = new StringBuilder();
 
@@ -102,6 +103,8 @@ namespace ResearchSearchTool
             AppendFilterExpression(industry, "Industry", filterExpression);
             AppendFilterExpression(nace, "NACE", filterExpression);
             AppendFilterExpression(material, "Material", filterExpression);
+            AppendFilterExpression(description, "Description", filterExpression);
+            AppendFilterExpression(additional, "[Additional information]", filterExpression);
 
             return filterExpression.ToString();
         }
