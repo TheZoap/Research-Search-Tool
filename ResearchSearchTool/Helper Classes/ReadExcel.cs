@@ -2,32 +2,30 @@
 using System;
 using System.Data;
 using System.IO;
+using System.Text;
+using System.Windows.Forms;
 
 namespace ResearchSearchTool
 {
     public static class ReadExcel
     {
-        public static DataTable ReadExcelFile(string filePath, int sheetIndex = 1)
+        public static async Task<DataTable> ReadExcelFile(string filePath, int sheetIndex = 1)
         {
             try
             {
-                using (var stream = File.OpenRead(filePath))
-                using (var reader = ExcelReaderFactory.CreateReader(stream))
+                var excelFilePath = filePath;
+
+                if (excelFilePath != null && File.Exists(excelFilePath))
                 {
-                    var dataSet = reader.AsDataSet(new ExcelDataSetConfiguration
-                    {
-                        ConfigureDataTable = (_) => new ExcelDataTableConfiguration
-                        {
-                            UseHeaderRow = true,
-                        }
-                    });
+                    Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
 
-                    if (dataSet.Tables.Count > sheetIndex)
-                    {
-                        return dataSet.Tables[sheetIndex];
-                    }
+                    var data = await Task.Run(() => ReadDataFromExcel(excelFilePath, sheetIndex));
 
-                    throw new IndexOutOfRangeException("Sheet index is out of range.");
+                    return data;
+                }
+                else
+                {
+                    MessageBox.Show("Invalid file path.");
                 }
             }
             catch (IOException ex)
@@ -42,16 +40,34 @@ namespace ResearchSearchTool
             {
                 MessageBox.Show($"The Excel file format is not supported: {ex.Message}");
             }
-            catch (IndexOutOfRangeException ex)
-            {
-                MessageBox.Show($"Sheet index is out of range: {ex.Message}");
-            }
             catch (Exception ex)
             {
                 MessageBox.Show($"Error reading Excel file: {ex.Message}");
             }
 
             return null;
+        }
+
+        private static DataTable ReadDataFromExcel(string filePath, int sheetIndex)
+        {
+            using (var stream = File.OpenRead(filePath))
+            using (var reader = ExcelReaderFactory.CreateReader(stream))
+            {
+                var dataSet = reader.AsDataSet(new ExcelDataSetConfiguration
+                {
+                    ConfigureDataTable = (_) => new ExcelDataTableConfiguration
+                    {
+                        UseHeaderRow = true
+                    }
+                });
+
+                if (dataSet.Tables.Count > sheetIndex)
+                {
+                    return dataSet.Tables[sheetIndex];
+                }
+
+                throw new IndexOutOfRangeException("Sheet index is out of range.");
+            }
         }
     }
 }

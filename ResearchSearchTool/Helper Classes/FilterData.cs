@@ -91,7 +91,7 @@ namespace ResearchSearchTool
         }
 
         public static string BuildFilterExpression(string category, string esrsTopic, string subTopic,
-        string geography, string industry, string nace, string material)
+        string geography,string industry, string nace, string material)
         {
             var filterExpression = new StringBuilder();
 
