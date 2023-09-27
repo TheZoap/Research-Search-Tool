@@ -36,6 +36,16 @@ namespace ResearchSearchTool
                         dataView = data.DefaultView;
                         dataGridView.DataSource = data.DefaultView;
                         ColumnHeaders.SetColumnHeaders(dataGridView);
+                        // Find the column by its header text and rename it
+                        foreach (DataGridViewColumn column in dataGridView.Columns)
+                        {
+                            if (column.HeaderText == "Links plaintext")
+                            {
+                                column.HeaderText = "Links click here";
+                                break; // Once you've found and renamed the column, exit the loop
+                            }
+                        }
+
                     }
                     else
                     {
@@ -67,9 +77,25 @@ namespace ResearchSearchTool
             int rowIndex = e.RowIndex;
             int columnIndex = e.ColumnIndex;
 
-            CellClick.OnCellClick(dataGridView, rowIndex, columnIndex);
-            
+            if (columnIndex >= 0 && rowIndex >= 0)
+            {
+                DataGridViewCell cell = dataGridView.Rows[rowIndex].Cells[columnIndex];
+
+                // Check if the clicked cell belongs to the "Links" column (adjust column index as needed)
+                if (dataGridView.Columns[columnIndex].HeaderText == "Links" 
+                    || dataGridView.Columns[columnIndex].HeaderText == "Links click here"
+                    || dataGridView.Columns[columnIndex].HeaderText == "Sources plaintext")
+                {
+                    // Open the link using CheckLinks.ClickCheckLink()
+                    CheckLinks.ClickCheckLink(dataGridView, rowIndex, columnIndex);
+                    return; // Exit the method to prevent CellClick.OnClick() from being called
+                }
+
+                // If it's not a link or not in the "Links" column, call CellClick.OnClick()
+                CellClick.OnCellClick(dataGridView, rowIndex, columnIndex);
+            }
         }
+
 
         private void ApplyFilters()
         {

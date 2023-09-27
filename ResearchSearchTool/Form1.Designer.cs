@@ -61,7 +61,7 @@
             // 
             // BrowseButton
             // 
-            BrowseButton.Location = new Point(918, 32);
+            BrowseButton.Location = new Point(12, 29);
             BrowseButton.Name = "BrowseButton";
             BrowseButton.Size = new Size(112, 34);
             BrowseButton.TabIndex = 1;
@@ -76,13 +76,12 @@
             dataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView.Location = new Point(187, 98);
             dataGridView.Name = "dataGridView";
+            dataGridView.ReadOnly = true;
             dataGridView.RowHeadersWidth = 62;
             dataGridView.RowTemplate.Height = 33;
             dataGridView.Size = new Size(972, 537);
             dataGridView.TabIndex = 20;
             dataGridView.CellClick += dataGridView_CellClick;
-            dataGridView.ShowCellToolTips = false;
-            dataGridView.ReadOnly = true;
             // 
             // categoryTextBox
             // 
@@ -137,7 +136,7 @@
             // 
             // filepathTextbox
             // 
-            filepathTextbox.Location = new Point(12, 32);
+            filepathTextbox.Location = new Point(147, 32);
             filepathTextbox.Name = "filepathTextbox";
             filepathTextbox.Size = new Size(871, 31);
             filepathTextbox.TabIndex = 0;
@@ -219,7 +218,7 @@
             // 
             // exportButton
             // 
-            exportButton.Location = new Point(1047, 32);
+            exportButton.Location = new Point(1047, 29);
             exportButton.Name = "exportButton";
             exportButton.Size = new Size(112, 34);
             exportButton.TabIndex = 21;
@@ -309,7 +308,6 @@
         private TextBox esrsTopicTextBox;
         private TextBox materialTextBox;
         private Label materialLabel;
-        private Button readButton;
         private TextBox filepathTextbox;
         private TextBox subtopictextBox;
         private Label subtopicLabel;

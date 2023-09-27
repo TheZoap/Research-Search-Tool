@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace ResearchSearchTool.Helper_Classes
 {
@@ -13,17 +14,21 @@ namespace ResearchSearchTool.Helper_Classes
             DataGridViewRow selectedRow = dataGridView.Rows[rowIndex];
             DataGridViewCell selectedCell = selectedRow.Cells[columnIndex];
 
-            bool isExpanded = (bool)(selectedCell.Tag ?? false);
+            // Check if the cell's value is not empty or null
+            if (selectedCell.Value != null && !string.IsNullOrEmpty(selectedCell.Value.ToString()))
+            {
+                bool isExpanded = (bool)(selectedCell.Tag ?? false);
 
-            if (isExpanded)
-            {
-                CellStyler.ResetRowStyles(selectedRow);
-                selectedCell.Tag = false;
-            }
-            else
-            {
-                CellStyler.ExpandRowStyles(selectedRow, selectedCell);
-                selectedCell.Tag = true;
+                if (isExpanded)
+                {
+                    CellStyler.ResetRowStyles(selectedRow);
+                    selectedCell.Tag = false;
+                }
+                else
+                {
+                    CellStyler.ExpandRowStyles(selectedRow, selectedCell);
+                    selectedCell.Tag = true;
+                }
             }
         }
     }
