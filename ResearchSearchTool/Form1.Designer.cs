@@ -61,9 +61,9 @@
             // 
             // BrowseButton
             // 
-            BrowseButton.Location = new Point(12, 29);
+            BrowseButton.Location = new Point(14, 32);
             BrowseButton.Name = "BrowseButton";
-            BrowseButton.Size = new Size(112, 34);
+            BrowseButton.Size = new Size(112, 32);
             BrowseButton.TabIndex = 1;
             BrowseButton.Text = "Browse file";
             BrowseButton.UseVisualStyleBackColor = true;
@@ -79,13 +79,14 @@
             dataGridView.ReadOnly = true;
             dataGridView.RowHeadersWidth = 62;
             dataGridView.RowTemplate.Height = 33;
-            dataGridView.Size = new Size(972, 537);
+            dataGridView.ShowCellToolTips = false;
+            dataGridView.Size = new Size(1081, 610);
             dataGridView.TabIndex = 20;
             dataGridView.CellClick += dataGridView_CellClick;
             // 
             // categoryTextBox
             // 
-            categoryTextBox.Location = new Point(12, 98);
+            categoryTextBox.Location = new Point(12, 126);
             categoryTextBox.Name = "categoryTextBox";
             categoryTextBox.Size = new Size(150, 31);
             categoryTextBox.TabIndex = 2;
@@ -94,7 +95,7 @@
             // categoryLabel
             // 
             categoryLabel.AutoSize = true;
-            categoryLabel.Location = new Point(16, 70);
+            categoryLabel.Location = new Point(12, 98);
             categoryLabel.Name = "categoryLabel";
             categoryLabel.Size = new Size(84, 25);
             categoryLabel.TabIndex = 3;
@@ -103,7 +104,7 @@
             // esrsTopicLabel
             // 
             esrsTopicLabel.AutoSize = true;
-            esrsTopicLabel.Location = new Point(18, 132);
+            esrsTopicLabel.Location = new Point(14, 160);
             esrsTopicLabel.Name = "esrsTopicLabel";
             esrsTopicLabel.Size = new Size(98, 25);
             esrsTopicLabel.TabIndex = 4;
@@ -111,7 +112,7 @@
             // 
             // esrsTopicTextBox
             // 
-            esrsTopicTextBox.Location = new Point(12, 160);
+            esrsTopicTextBox.Location = new Point(12, 188);
             esrsTopicTextBox.Name = "esrsTopicTextBox";
             esrsTopicTextBox.Size = new Size(150, 31);
             esrsTopicTextBox.TabIndex = 5;
@@ -119,7 +120,7 @@
             // 
             // materialTextBox
             // 
-            materialTextBox.Location = new Point(10, 470);
+            materialTextBox.Location = new Point(10, 498);
             materialTextBox.Name = "materialTextBox";
             materialTextBox.Size = new Size(150, 31);
             materialTextBox.TabIndex = 15;
@@ -128,7 +129,7 @@
             // materialLabel
             // 
             materialLabel.AutoSize = true;
-            materialLabel.Location = new Point(14, 442);
+            materialLabel.Location = new Point(10, 470);
             materialLabel.Name = "materialLabel";
             materialLabel.Size = new Size(75, 25);
             materialLabel.TabIndex = 6;
@@ -138,12 +139,12 @@
             // 
             filepathTextbox.Location = new Point(147, 32);
             filepathTextbox.Name = "filepathTextbox";
-            filepathTextbox.Size = new Size(871, 31);
+            filepathTextbox.Size = new Size(871, 32);
             filepathTextbox.TabIndex = 0;
             // 
             // subtopictextBox
             // 
-            subtopictextBox.Location = new Point(12, 222);
+            subtopictextBox.Location = new Point(12, 250);
             subtopictextBox.Name = "subtopictextBox";
             subtopictextBox.Size = new Size(150, 31);
             subtopictextBox.TabIndex = 7;
@@ -152,7 +153,7 @@
             // subtopicLabel
             // 
             subtopicLabel.AutoSize = true;
-            subtopicLabel.Location = new Point(16, 194);
+            subtopicLabel.Location = new Point(12, 222);
             subtopicLabel.Name = "subtopicLabel";
             subtopicLabel.Size = new Size(91, 25);
             subtopicLabel.TabIndex = 10;
@@ -160,7 +161,7 @@
             // 
             // geographytextBox
             // 
-            geographytextBox.Location = new Point(12, 284);
+            geographytextBox.Location = new Point(12, 312);
             geographytextBox.Name = "geographytextBox";
             geographytextBox.Size = new Size(150, 31);
             geographytextBox.TabIndex = 9;
@@ -169,7 +170,7 @@
             // geographyLabel
             // 
             geographyLabel.AutoSize = true;
-            geographyLabel.Location = new Point(16, 256);
+            geographyLabel.Location = new Point(12, 284);
             geographyLabel.Name = "geographyLabel";
             geographyLabel.Size = new Size(100, 25);
             geographyLabel.TabIndex = 12;
@@ -177,7 +178,7 @@
             // 
             // industryTextBox
             // 
-            industryTextBox.Location = new Point(12, 346);
+            industryTextBox.Location = new Point(12, 374);
             industryTextBox.Name = "industryTextBox";
             industryTextBox.Size = new Size(150, 31);
             industryTextBox.TabIndex = 11;
@@ -193,7 +194,7 @@
             // industryLabel
             // 
             industryLabel.AutoSize = true;
-            industryLabel.Location = new Point(16, 318);
+            industryLabel.Location = new Point(12, 346);
             industryLabel.Name = "industryLabel";
             industryLabel.Size = new Size(77, 25);
             industryLabel.TabIndex = 17;
@@ -202,7 +203,7 @@
             // naceLabel
             // 
             naceLabel.AutoSize = true;
-            naceLabel.Location = new Point(16, 380);
+            naceLabel.Location = new Point(12, 408);
             naceLabel.Name = "naceLabel";
             naceLabel.Size = new Size(57, 25);
             naceLabel.TabIndex = 19;
@@ -210,7 +211,7 @@
             // 
             // naceTextBox
             // 
-            naceTextBox.Location = new Point(12, 408);
+            naceTextBox.Location = new Point(12, 436);
             naceTextBox.Name = "naceTextBox";
             naceTextBox.Size = new Size(150, 31);
             naceTextBox.TabIndex = 13;
@@ -218,9 +219,9 @@
             // 
             // exportButton
             // 
-            exportButton.Location = new Point(1047, 29);
+            exportButton.Location = new Point(1041, 32);
             exportButton.Name = "exportButton";
-            exportButton.Size = new Size(112, 34);
+            exportButton.Size = new Size(112, 32);
             exportButton.TabIndex = 21;
             exportButton.Text = "Export";
             exportButton.UseVisualStyleBackColor = true;
@@ -228,7 +229,7 @@
             // 
             // descriptionTextBox
             // 
-            descriptionTextBox.Location = new Point(8, 532);
+            descriptionTextBox.Location = new Point(8, 560);
             descriptionTextBox.Name = "descriptionTextBox";
             descriptionTextBox.Size = new Size(150, 31);
             descriptionTextBox.TabIndex = 23;
@@ -237,7 +238,7 @@
             // descriptionLabel
             // 
             descriptionLabel.AutoSize = true;
-            descriptionLabel.Location = new Point(12, 504);
+            descriptionLabel.Location = new Point(8, 532);
             descriptionLabel.Name = "descriptionLabel";
             descriptionLabel.Size = new Size(102, 25);
             descriptionLabel.TabIndex = 22;
@@ -245,7 +246,7 @@
             // 
             // additionalTextBox
             // 
-            additionalTextBox.Location = new Point(8, 594);
+            additionalTextBox.Location = new Point(8, 622);
             additionalTextBox.Name = "additionalTextBox";
             additionalTextBox.Size = new Size(150, 31);
             additionalTextBox.TabIndex = 25;
@@ -254,7 +255,7 @@
             // additionalLabel
             // 
             additionalLabel.AutoSize = true;
-            additionalLabel.Location = new Point(12, 566);
+            additionalLabel.Location = new Point(8, 594);
             additionalLabel.Name = "additionalLabel";
             additionalLabel.Size = new Size(130, 25);
             additionalLabel.TabIndex = 24;
@@ -264,7 +265,7 @@
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1171, 647);
+            ClientSize = new Size(1280, 720);
             Controls.Add(additionalTextBox);
             Controls.Add(additionalLabel);
             Controls.Add(descriptionTextBox);

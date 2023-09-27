@@ -82,7 +82,7 @@ namespace ResearchSearchTool
                 DataGridViewCell cell = dataGridView.Rows[rowIndex].Cells[columnIndex];
 
                 // Check if the clicked cell is a link
-                if (dataGridView.Columns[columnIndex].HeaderText == "Links" 
+                if (dataGridView.Columns[columnIndex].HeaderText == "Links"
                     || dataGridView.Columns[columnIndex].HeaderText == "Links click here"
                     || dataGridView.Columns[columnIndex].HeaderText == "Sources plaintext")
                 {
