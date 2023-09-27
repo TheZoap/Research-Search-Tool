@@ -81,7 +81,7 @@ namespace ResearchSearchTool
             {
                 DataGridViewCell cell = dataGridView.Rows[rowIndex].Cells[columnIndex];
 
-                // Check if the clicked cell belongs to the "Links" column (adjust column index as needed)
+                // Check if the clicked cell is a link
                 if (dataGridView.Columns[columnIndex].HeaderText == "Links" 
                     || dataGridView.Columns[columnIndex].HeaderText == "Links click here"
                     || dataGridView.Columns[columnIndex].HeaderText == "Sources plaintext")
@@ -91,7 +91,7 @@ namespace ResearchSearchTool
                     return; // Exit the method to prevent CellClick.OnClick() from being called
                 }
 
-                // If it's not a link or not in the "Links" column, call CellClick.OnClick()
+                // If it's not a link, call CellClick.OnClick()
                 CellClick.OnCellClick(dataGridView, rowIndex, columnIndex);
             }
         }
