@@ -6,97 +6,14 @@ namespace ResearchSearchTool
 {
     public static class FilterData
     {
-        public static void FilterDataByCategory(DataGridView dataGridView, string filterText)
-        {
-            var dv = dataGridView.DataSource as DataView;
-
-            var filterExpression = new StringBuilder();
-            filterExpression.Append("Category LIKE '%");
-            filterExpression.Append(filterText);
-            filterExpression.Append("%'");
-
-            dv.RowFilter = filterExpression.ToString();
-        }
-
-        public static void FilterDataByESRSTopic(DataGridView dataGridView, string filterText)
-        {
-            var dv = dataGridView.DataSource as DataView;
-
-            var filterExpression = new StringBuilder();
-            filterExpression.Append("[ESRS Topic]  LIKE '%");
-            filterExpression.Append(filterText);
-            filterExpression.Append("%'");
-
-            dv.RowFilter = filterExpression.ToString();
-        }
-
-        public static void FilterDataBySubTopic(DataGridView dataGridView, string filterText)
-        {
-            var dv = dataGridView.DataSource as DataView;
-
-            var filterExpression = new StringBuilder();
-            filterExpression.Append("[Sub-Topic]  LIKE '%");
-            filterExpression.Append(filterText);
-            filterExpression.Append("%'");
-
-            dv.RowFilter = filterExpression.ToString();
-        }
-
-        public static void FilterDataByGeography(DataGridView dataGridView, string filterText)
-        {
-            var dv = dataGridView.DataSource as DataView;
-
-            var filterExpression = new StringBuilder();
-            filterExpression.Append("Geography  LIKE '%");
-            filterExpression.Append(filterText);
-            filterExpression.Append("%'");
-
-            dv.RowFilter = filterExpression.ToString();
-        }
-
-        public static void FilterDataByIndustry(DataGridView dataGridView, string filterText)
-        {
-            var dv = dataGridView.DataSource as DataView;
-
-            var filterExpression = new StringBuilder();
-            filterExpression.Append("Industry  LIKE '%");
-            filterExpression.Append(filterText);
-            filterExpression.Append("%'");
-
-            dv.RowFilter = filterExpression.ToString();
-        }
-
-        public static void FilterDataByNACE(DataGridView dataGridView, string filterText)
-        {
-            var dv = dataGridView.DataSource as DataView;
-
-            var filterExpression = new StringBuilder();
-            filterExpression.Append("NACE  LIKE '%");
-            filterExpression.Append(filterText);
-            filterExpression.Append("%'");
-
-            dv.RowFilter = filterExpression.ToString();
-        }
-
-        public static void FilterDataByMaterial(DataGridView dataGridView, string filterText)
-        {
-            var dv = dataGridView.DataSource as DataView;
-
-            var filterExpression = new StringBuilder();
-            filterExpression.Append("Material  LIKE '%");
-            filterExpression.Append(filterText);
-            filterExpression.Append("%'");
-
-            dv.RowFilter = filterExpression.ToString();
-        }
-
-        public static string BuildFilterExpression(string category, string esrsTopic, string subTopic,
+        public static string BuildFilterExpression(string categoryComboBox, string esrsTopic, string subTopic,
         string geography,string industry, string nace, string material, string description,
-        string additional)
+        string additional, string esrsTopicComboBox, string subTopicComboBox,
+        string geographyComboBox, string industryComboBox, string naceComboBox, string materialComboBox)
         {
             var filterExpression = new StringBuilder();
 
-            AppendFilterExpression(category, "Category", filterExpression);
+            AppendFilterExpression(categoryComboBox, "Category", filterExpression);
             AppendFilterExpression(esrsTopic, "[ESRS Topic]", filterExpression);
             AppendFilterExpression(subTopic, "[Sub-Topic]", filterExpression);
             AppendFilterExpression(geography, "Geography", filterExpression);
@@ -105,6 +22,12 @@ namespace ResearchSearchTool
             AppendFilterExpression(material, "Material", filterExpression);
             AppendFilterExpression(description, "Description", filterExpression);
             AppendFilterExpression(additional, "[Additional information]", filterExpression);
+            AppendFilterExpression(esrsTopicComboBox, "[ESRS Topic]", filterExpression);
+            AppendFilterExpression(subTopicComboBox, "[Sub-Topic]", filterExpression);
+            AppendFilterExpression(geographyComboBox, "Geography", filterExpression);
+            AppendFilterExpression(industryComboBox, "Industry", filterExpression);
+            AppendFilterExpression(naceComboBox, "NACE", filterExpression);
+            AppendFilterExpression(materialComboBox, "Material", filterExpression);
 
             return filterExpression.ToString();
         }
