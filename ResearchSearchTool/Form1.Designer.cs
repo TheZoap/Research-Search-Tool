@@ -37,19 +37,13 @@
             dataGridView = new DoubleBufferedDataGridView();
             categoryLabel = new Label();
             esrsTopicLabel = new Label();
-            esrsTopicTextBox = new TextBox();
-            materialTextBox = new TextBox();
             materialLabel = new Label();
             filepathTextbox = new TextBox();
-            subtopictextBox = new TextBox();
             subtopicLabel = new Label();
-            geographytextBox = new TextBox();
             geographyLabel = new Label();
-            industryTextBox = new TextBox();
             label1 = new Label();
             industryLabel = new Label();
             naceLabel = new Label();
-            naceTextBox = new TextBox();
             exportButton = new Button();
             descriptionTextBox = new TextBox();
             descriptionLabel = new Label();
@@ -80,13 +74,13 @@
             dataGridView.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView.Location = new Point(352, 98);
+            dataGridView.Location = new Point(168, 98);
             dataGridView.Name = "dataGridView";
             dataGridView.ReadOnly = true;
             dataGridView.RowHeadersWidth = 62;
             dataGridView.RowTemplate.Height = 33;
             dataGridView.ShowCellToolTips = false;
-            dataGridView.Size = new Size(916, 610);
+            dataGridView.Size = new Size(1100, 610);
             dataGridView.TabIndex = 20;
             dataGridView.CellClick += dataGridView_CellClick;
             // 
@@ -108,22 +102,6 @@
             esrsTopicLabel.TabIndex = 4;
             esrsTopicLabel.Text = "ESRS Topic";
             // 
-            // esrsTopicTextBox
-            // 
-            esrsTopicTextBox.Location = new Point(12, 188);
-            esrsTopicTextBox.Name = "esrsTopicTextBox";
-            esrsTopicTextBox.Size = new Size(150, 31);
-            esrsTopicTextBox.TabIndex = 5;
-            esrsTopicTextBox.TextChanged += esrsTopicTextBox_TextChanged;
-            // 
-            // materialTextBox
-            // 
-            materialTextBox.Location = new Point(10, 498);
-            materialTextBox.Name = "materialTextBox";
-            materialTextBox.Size = new Size(150, 31);
-            materialTextBox.TabIndex = 15;
-            materialTextBox.TextChanged += materialTextBox_TextChanged;
-            // 
             // materialLabel
             // 
             materialLabel.AutoSize = true;
@@ -140,14 +118,6 @@
             filepathTextbox.Size = new Size(871, 31);
             filepathTextbox.TabIndex = 0;
             // 
-            // subtopictextBox
-            // 
-            subtopictextBox.Location = new Point(12, 250);
-            subtopictextBox.Name = "subtopictextBox";
-            subtopictextBox.Size = new Size(150, 31);
-            subtopictextBox.TabIndex = 7;
-            subtopictextBox.TextChanged += subtopictextBox_TextChanged;
-            // 
             // subtopicLabel
             // 
             subtopicLabel.AutoSize = true;
@@ -157,14 +127,6 @@
             subtopicLabel.TabIndex = 10;
             subtopicLabel.Text = "Sub-Topic";
             // 
-            // geographytextBox
-            // 
-            geographytextBox.Location = new Point(12, 312);
-            geographytextBox.Name = "geographytextBox";
-            geographytextBox.Size = new Size(150, 31);
-            geographytextBox.TabIndex = 9;
-            geographytextBox.TextChanged += geographytextBox_TextChanged;
-            // 
             // geographyLabel
             // 
             geographyLabel.AutoSize = true;
@@ -173,14 +135,6 @@
             geographyLabel.Size = new Size(100, 25);
             geographyLabel.TabIndex = 12;
             geographyLabel.Text = "Geography";
-            // 
-            // industryTextBox
-            // 
-            industryTextBox.Location = new Point(12, 374);
-            industryTextBox.Name = "industryTextBox";
-            industryTextBox.Size = new Size(150, 31);
-            industryTextBox.TabIndex = 11;
-            industryTextBox.TextChanged += industryTextBox_TextChanged;
             // 
             // label1
             // 
@@ -207,14 +161,6 @@
             naceLabel.TabIndex = 19;
             naceLabel.Text = "NACE";
             // 
-            // naceTextBox
-            // 
-            naceTextBox.Location = new Point(12, 436);
-            naceTextBox.Name = "naceTextBox";
-            naceTextBox.Size = new Size(150, 31);
-            naceTextBox.TabIndex = 13;
-            naceTextBox.TextChanged += naceTextBox_TextChanged;
-            // 
             // exportButton
             // 
             exportButton.Location = new Point(1041, 32);
@@ -227,9 +173,9 @@
             // 
             // descriptionTextBox
             // 
-            descriptionTextBox.Location = new Point(8, 560);
+            descriptionTextBox.Location = new Point(12, 560);
             descriptionTextBox.Name = "descriptionTextBox";
-            descriptionTextBox.Size = new Size(154, 31);
+            descriptionTextBox.Size = new Size(150, 31);
             descriptionTextBox.TabIndex = 23;
             descriptionTextBox.TextChanged += descriptionTextBox_TextChanged;
             // 
@@ -244,9 +190,9 @@
             // 
             // additionalTextBox
             // 
-            additionalTextBox.Location = new Point(8, 622);
+            additionalTextBox.Location = new Point(12, 622);
             additionalTextBox.Name = "additionalTextBox";
-            additionalTextBox.Size = new Size(154, 31);
+            additionalTextBox.Size = new Size(150, 31);
             additionalTextBox.TabIndex = 25;
             additionalTextBox.TextChanged += additionalTextBox_TextChanged;
             // 
@@ -271,53 +217,53 @@
             // esrsTopicComboBox
             // 
             esrsTopicComboBox.FormattingEnabled = true;
-            esrsTopicComboBox.Location = new Point(168, 188);
+            esrsTopicComboBox.Location = new Point(12, 188);
             esrsTopicComboBox.Name = "esrsTopicComboBox";
             esrsTopicComboBox.Size = new Size(150, 33);
-            esrsTopicComboBox.TabIndex = 26;
+            esrsTopicComboBox.TabIndex = 5;
             esrsTopicComboBox.TextChanged += EsrsTopicComboBox_TextChanged;
             // 
             // subTopicComboBox
             // 
             subTopicComboBox.FormattingEnabled = true;
-            subTopicComboBox.Location = new Point(168, 248);
+            subTopicComboBox.Location = new Point(12, 248);
             subTopicComboBox.Name = "subTopicComboBox";
             subTopicComboBox.Size = new Size(150, 33);
-            subTopicComboBox.TabIndex = 27;
+            subTopicComboBox.TabIndex = 7;
             subTopicComboBox.TextChanged += SubTopicComboBox_TextChanged;
             // 
             // geographyComboBox
             // 
             geographyComboBox.FormattingEnabled = true;
-            geographyComboBox.Location = new Point(168, 310);
+            geographyComboBox.Location = new Point(12, 312);
             geographyComboBox.Name = "geographyComboBox";
             geographyComboBox.Size = new Size(150, 33);
-            geographyComboBox.TabIndex = 28;
+            geographyComboBox.TabIndex = 9;
             geographyComboBox.TextChanged += GeographyComboBox_TextChanged;
             // 
             // industryComboBox
             // 
             industryComboBox.FormattingEnabled = true;
-            industryComboBox.Location = new Point(168, 372);
+            industryComboBox.Location = new Point(12, 374);
             industryComboBox.Name = "industryComboBox";
             industryComboBox.Size = new Size(150, 33);
-            industryComboBox.TabIndex = 29;
+            industryComboBox.TabIndex = 11;
             industryComboBox.TextChanged += IndustryComboBox_TextChanged;
             // 
             // naceComboBox
             // 
-            naceComboBox.Location = new Point(168, 436);
+            naceComboBox.Location = new Point(12, 436);
             naceComboBox.Name = "naceComboBox";
             naceComboBox.Size = new Size(150, 33);
-            naceComboBox.TabIndex = 30;
+            naceComboBox.TabIndex = 13;
             naceComboBox.TextChanged += NaceComboBox_TextChanged;
             // 
             // materialComboBox
             // 
-            materialComboBox.Location = new Point(168, 496);
+            materialComboBox.Location = new Point(12, 498);
             materialComboBox.Name = "materialComboBox";
             materialComboBox.Size = new Size(150, 33);
-            materialComboBox.TabIndex = 31;
+            materialComboBox.TabIndex = 15;
             materialComboBox.TextChanged += MaterialComboBox_TextChanged;
             // 
             // Form1
@@ -338,17 +284,11 @@
             Controls.Add(descriptionLabel);
             Controls.Add(exportButton);
             Controls.Add(naceLabel);
-            Controls.Add(naceTextBox);
             Controls.Add(industryLabel);
-            Controls.Add(industryTextBox);
-            Controls.Add(geographytextBox);
             Controls.Add(geographyLabel);
-            Controls.Add(subtopictextBox);
             Controls.Add(subtopicLabel);
             Controls.Add(filepathTextbox);
-            Controls.Add(materialTextBox);
             Controls.Add(materialLabel);
-            Controls.Add(esrsTopicTextBox);
             Controls.Add(esrsTopicLabel);
             Controls.Add(categoryLabel);
             Controls.Add(dataGridView);

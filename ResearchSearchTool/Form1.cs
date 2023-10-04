@@ -52,24 +52,21 @@ namespace ResearchSearchTool
                         PopulateComboBox(industryComboBox, "Industry");
                         PopulateComboBox(naceComboBox, "NACE");
                         PopulateComboBox(materialComboBox, "Material");
-                        
+
+                        // Set the DropdownWidth for ComboBoxes to accommodate longer text
+                        categoryComboBox.DropDownWidth = CalculateDropDownWidth(categoryComboBox);
+                        esrsTopicComboBox.DropDownWidth = CalculateDropDownWidth(esrsTopicComboBox);
+                        subTopicComboBox.DropDownWidth = CalculateDropDownWidth(subTopicComboBox);
+                        geographyComboBox.DropDownWidth = CalculateDropDownWidth(geographyComboBox);
+                        industryComboBox.DropDownWidth = CalculateDropDownWidth(industryComboBox);
+                        naceComboBox.DropDownWidth = CalculateDropDownWidth(naceComboBox);
+                        materialComboBox.DropDownWidth = CalculateDropDownWidth(materialComboBox);
+
                     }
                     else
                     {
                         MessageBox.Show("No data available to display.");
                     }
-                }
-                catch (IOException ex)
-                {
-                    MessageBox.Show($"An I/O error occurred while reading the file: {ex.Message}");
-                }
-                catch (InvalidDataException ex)
-                {
-                    MessageBox.Show($"The file is not in a valid format: {ex.Message}");
-                }
-                catch (NotSupportedException ex)
-                {
-                    MessageBox.Show($"The file format is not supported: {ex.Message}");
                 }
                 catch (Exception ex)
                 {
@@ -103,61 +100,38 @@ namespace ResearchSearchTool
             }
         }
 
-
         private void ApplyFilters()
         {
-            if (dataView != null)
-            {
-                var filterExpression = FilterData.BuildFilterExpression(
-                    categoryComboBox.Text,
-                    esrsTopicTextBox.Text,
-                    subtopictextBox.Text,
-                    geographytextBox.Text,
-                    industryTextBox.Text,
-                    naceTextBox.Text,
-                    materialTextBox.Text,
-                    descriptionTextBox.Text,
-                    additionalTextBox.Text,
-                    esrsTopicComboBox.Text,
-                    subTopicComboBox.Text,
-                    geographyComboBox.Text,
-                    industryComboBox.Text,
-                    naceComboBox.Text,
-                    materialComboBox.Text);
-
-                dataView.RowFilter = filterExpression;
-            }
+            FilterData.ApplyFilters(
+                dataView, 
+                categoryComboBox.Text, 
+                descriptionTextBox.Text, 
+                additionalTextBox.Text, 
+                esrsTopicComboBox.Text, 
+                subTopicComboBox.Text, 
+                geographyComboBox.Text, 
+                industryComboBox.Text, 
+                naceComboBox.Text, 
+                materialComboBox.Text);
         }
+
+
 
         private void PopulateComboBox(ComboBox comboBox, string columnName)
         {
-            DataGridViewColumn column = dataGridView.Columns[columnName];
-            if (column != null)
+            FilterData.PopulateComboBox(comboBox, dataGridView, columnName);
+        }
+
+
+        private int CalculateDropDownWidth(ComboBox comboBox)
+        {
+            int maxWidth = 0;
+            foreach (object item in comboBox.Items)
             {
-                // Create a HashSet to store unique values
-                HashSet<string> uniqueValues = new HashSet<string>();
-
-                foreach (DataGridViewRow row in dataGridView.Rows)
-                {
-                    object cellValue = row.Cells[column.Index].Value;
-                    if (cellValue != null)
-                    {
-                        string value = cellValue.ToString().Trim(); // Trim the value to remove leading and trailing spaces
-                        if (!string.IsNullOrWhiteSpace(value) && !uniqueValues.Contains(value))
-                        {
-                            uniqueValues.Add(value);
-                        }
-                    }
-                }
-
-                // Clear existing items in the ComboBox and populate with unique values
-                comboBox.Items.Clear();
-                comboBox.Items.AddRange(uniqueValues.ToArray());
-
-                // Enable AutoComplete for ComboBox
-                comboBox.AutoCompleteMode = AutoCompleteMode.Suggest;
-                comboBox.AutoCompleteSource = AutoCompleteSource.ListItems;
+                int itemWidth = TextRenderer.MeasureText(item.ToString(), comboBox.Font).Width;
+                maxWidth = Math.Max(maxWidth, itemWidth);
             }
+            return maxWidth + SystemInformation.VerticalScrollBarWidth;
         }
 
         private void categoryComboBox_TextChanged(object sender, EventArgs e)
@@ -191,41 +165,6 @@ namespace ResearchSearchTool
         }
 
         private void MaterialComboBox_TextChanged(object sender, EventArgs e)
-        {
-            ApplyFilters();
-        }
-
-        private void categoryTextBox_TextChanged(object sender, EventArgs e)
-        {
-            ApplyFilters();
-        }
-
-        private void esrsTopicTextBox_TextChanged(object sender, EventArgs e)
-        {
-            ApplyFilters();
-        }
-
-        private void subtopictextBox_TextChanged(object sender, EventArgs e)
-        {
-            ApplyFilters();
-        }
-
-        private void geographytextBox_TextChanged(object sender, EventArgs e)
-        {
-            ApplyFilters();
-        }
-
-        private void industryTextBox_TextChanged(object sender, EventArgs e)
-        {
-            ApplyFilters();
-        }
-
-        private void naceTextBox_TextChanged(object sender, EventArgs e)
-        {
-            ApplyFilters();
-        }
-
-        private void materialTextBox_TextChanged(object sender, EventArgs e)
         {
             ApplyFilters();
         }
