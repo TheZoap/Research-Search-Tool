@@ -115,13 +115,10 @@ namespace ResearchSearchTool
                 materialComboBox.Text);
         }
 
-
-
         private void PopulateComboBox(ComboBox comboBox, string columnName)
         {
             FilterData.PopulateComboBox(comboBox, dataGridView, columnName);
         }
-
 
         private int CalculateDropDownWidth(ComboBox comboBox)
         {
